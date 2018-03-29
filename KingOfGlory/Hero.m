@@ -24,19 +24,25 @@
         self.state = HeroStateMotionless;
         self.speed = 2;
         self.angle = 0;
+        self.moveTimer = [NSTimer scheduledTimerWithTimeInterval:0.02 target:self selector:@selector(onMove:) userInfo:nil repeats:YES];
     }
     return self;
 }
 
 -(void)move{
-    if (self.moveTimer) {
-//        [self.moveTimer invalidate];
-    }
-    if (self.state == HeroStateMoving) {
-        return;
-    }
+//    if (self.moveTimer) {
+////        [self.moveTimer invalidate];
+//    }
+//    if (self.state == HeroStateMoving) {
+//        return;
+//    }
+//
+//    if (!self.moveTimer) {
+//
+//    }else{
+//        [self.moveTimer setFireDate:[NSDate date]];
+//    }
     
-    self.moveTimer = [NSTimer scheduledTimerWithTimeInterval:0.02 target:self selector:@selector(onMove:) userInfo:nil repeats:YES];
     self.state = HeroStateMoving;
 }
 
@@ -67,7 +73,16 @@
 
 -(void)stop{
     self.state = HeroStateMotionless;
-    [self.moveTimer invalidate];
+//    [self.moveTimer invalidate];
+//    [self.moveTimer setFireDate:[NSDate distantFuture]];
+}
+
+-(float)speed{
+    if (self.state == HeroStateMotionless) {
+        return 0;
+    }
+    
+    return 2;
 }
 
 @end
